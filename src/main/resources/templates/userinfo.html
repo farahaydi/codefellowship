@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff; /* White background for the page */
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1em 0;
+        }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            background-color: #333;
+            overflow: hidden;
+        }
+        nav li {
+            float: left;
+            margin-right: 10px;
+        }
+        nav a {
+            display: block;
+            color: #fff;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        nav a:hover {
+            background-color: #ddd;
+            color: #333;
+        }
+        main {
+            padding: 20px;
+        }
+        section#user-info {
+            background-color: #eee; /* Light gray background for the container */
+            padding: 20px;
+            border-radius: 10px;
+        }
+        section#user-info ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        section#user-info li {
+            margin-bottom: 10px;
+        }
+        section#user-info li strong {
+            display: inline-block;
+            width: 150px;
+        }
+        button {
+            background-color: #ffb6c1; /* Pink color for the button */
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #ff8c99; /* Lighter pink on hover */
+        }
+    </style>
+</head>
+<body>
+<nav>
+    <ul>
+        <li><a th:href="@{/}">Home</a></li>
+        <li><a th:href="@{/logout}">Log Out</a></li>
+    </ul>
+</nav>
+<main>
+    <section id="user-info">
+        <h2>User Information</h2>
+        <ul>
+            <li><strong>Username:</strong> <span th:text="${user.username}"></span></li>
+            <li><strong>First Name:</strong> <span th:text="${user.firstName}"></span></li>
+            <li><strong>Last Name:</strong> <span th:text="${user.lastName}"></span></li>
+            <li><strong>Date of Birth:</strong> <span th:text="${#dates.format(user.dateOfBirth, 'yyyy-MM-dd')}"></span></li>
+            <li><strong>Bio:</strong> <span th:text="${user.bio}"></span></li>
+        </ul>
+    </section>
+</main>
+</body>
+</html>
