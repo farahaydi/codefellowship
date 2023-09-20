@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Page</title>
+  <style>
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<h1>Welcome, <span th:text="${user.username}"></span>!</h1>
+
+<input type="radio" name="tab" id="createTab" checked>
+<label for="createTab">Create Post</label>
+
+<input type="radio" name="tab" id="viewTab">
+<label for="viewTab">View Posts</label>
+
+<div class="tab-content" id="createContent">
+  <h2>Create a Post</h2>
+  <form action="/create-Post" method="post">
+    <label for="body">Post Content:</label>
+    <textarea id="body" name="body" required></textarea><br><br>
+    <input type="submit" value="Create Post">
+  </form>
+</div>
+
+<div class="tab-content" id="viewContent">
+  <h2>Your Posts:</h2>
+  <ul>
+    <li th:each="post : ${user.posts}">
+      <span th:text="${post.body} + ' - ' + ${post.createdAt}"></span>
+    </li>
+  </ul>
+</div>
+</body>
+</html>

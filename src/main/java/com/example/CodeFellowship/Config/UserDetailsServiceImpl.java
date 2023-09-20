@@ -7,6 +7,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import java.security.Principal;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -24,4 +28,5 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         System.out.println("Found User: "+applicationUser.getUsername());
         return applicationUser;
     }
+
 }
