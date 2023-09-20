@@ -3,12 +3,10 @@ package com.example.CodeFellowship.Models;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class ApplicationUser implements UserDetails {
@@ -21,18 +19,22 @@ public class ApplicationUser implements UserDetails {
     private String lastName;
     private Date dateOfBirth;
     private String bio;
+    private String image;
+    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
+    private List<Post> post;
     public ApplicationUser()
     {
 
     }
 
-    public ApplicationUser(String username, String password, String firstName, String lastName, Date dateOfBirth, String bio) {
+    public ApplicationUser(String username, String password, String firstName, String lastName, Date dateOfBirth, String bio,String image) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
         this.bio = bio;
+        this.image=image;
     }
 
     @Override
@@ -110,5 +112,13 @@ public class ApplicationUser implements UserDetails {
 
     public void setBio(String bio) {
         this.bio = bio;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

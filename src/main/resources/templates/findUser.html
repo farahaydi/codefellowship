@@ -39,12 +39,17 @@
         }
         main {
             padding: 20px;
+            text-align: center;
         }
         section#user-info {
             background-color: #fff; /* White background for the container */
             padding: 20px;
             border-radius: 10px;
             margin-bottom: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: left;
         }
         section#user-info ul {
             list-style-type: none;
@@ -73,7 +78,7 @@
         h2 {
             text-align: center; /* Center the heading */
         }
-         form {
+        form {
             max-width: 600px;
             margin: 0 auto;
             background-color: #fff;
@@ -111,16 +116,40 @@
         form input[type="submit"]:hover {
             background-color: #4c70ba; /* Darker shade of blue on hover */
         }
-        .errorMessage {
-    color: red;
-    font-weight: bold;
-    text-align: center;
-}
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;
+            max-width: 400px; /* Adjust the max-width as per your preference */
+            margin: 0 auto; /* Center the list items */
+            text-align: left; /* Reset text alignment within the list items */
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            transition: background-color 0.3s;
+        }
+        a {
+            text-decoration: none;
+            color: #333;
+            display: inline-block;
+        }
+        a:hover {
+            background-color: #ddd;
+        }
+        img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
     </style>
 </head>
 <body>
 <header>
-    <h1>User Profile</h1>
+    <h1>Find Users</h1>
 </header>
 <nav>
     <ul>
@@ -128,42 +157,14 @@
         <li><a th:href="@{/perform_logout}">Log Out</a></li>
     </ul>
 </nav>
-<main>
-    <section id="user-info">
-        <h2>User Information</h2>
-        <ul>
-            <li><strong>Username:</strong> <span th:text="${user.username}"></span></li>
-            <li><strong>First Name:</strong> <span th:text="${user.firstName}"></span></li>
-            <li><strong>Last Name:</strong> <span th:text="${user.lastName}"></span></li>
-            <li><strong>Date of Birth:</strong> <span th:text="${#dates.format(user.dateOfBirth, 'yyyy-MM-dd')}"></span></li>
-            <li><strong>Bio:</strong> <span th:text="${user.bio}"></span></li>
-            <li><strong>Image :</strong><span><img th:src="${user.image}" alt="user Image" width="100" height="100" /></span></li>
-        </ul>
-        <h2>Posts</h2>
-        <ul>
-            <li th:each="post : ${posts}">
-                <strong th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd')}"></strong>
-                <p th:text="${post.body}"></p>
-            </li>
-        </ul>
-    </section>
-</main>
-<div th:replace="/fragments/error-fragment :: dino-error"></div>
-<h2>Edit User Information</h2>
-<form th:action="@{'/myprofile'}" method="post">
-    <input type="hidden" name="_method" value="put">
-    <input id="username" type="hidden" name="username" th:value="${user.username}">
-    <label for="firstName">First Name:</label>
-    <input id="firstName" type="text" name="firstName" th:value="${user.firstName}">
-    <label for="lastName">Last Name:</label>
-    <input id="lastName" type="text" name="lastName" th:value="${user.lastName}">
-    <label for="dateOfBirth">Date of Birth:</label>
-    <input id="dateOfBirth" type="date" name="dateOfBirth" th:value="${#dates.format(user.dateOfBirth, 'yyyy-MM-dd')}">
-    <label for="bio">Bio:</label>
-    <input id="bio" type="text" name="bio" th:value="${user.bio}">
-    <label for="image">Image:</label>
-    <input id="image" type="text" name="image" th:value="${user.image}">
-    <input type="submit" value="Save Changes">
-</form>
+<ul>
+    <li th:each="u : ${users}">
+        <a th:href="@{'/userinfo/' + ${u.id}}">
+            <img th:src="${u.image}" alt="User Image">
+            <span th:text="${u.username}"></span>
+        </a>
+    </li>
+    <br/>
+</ul>
 </body>
 </html>
