@@ -1,0 +1,92 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.welcome-container {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    display: inline-block;
+}
+
+h1, h3 {
+    color: #333;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #3b5998; /* Facebook blue color */
+    overflow: hidden;
+}
+
+nav li {
+    float: left;
+    margin-right: 10px;
+}
+
+nav a {
+    display: block;
+    color: #fff;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    background-color: #4c70ba; /* Darker shade of blue on hover */
+}
+
+nav a:nth-child(2),
+nav a:nth-child(3) {
+    display: none;
+}
+
+p {
+    font-size: 20px;
+    color: #333;
+}
+
+h3 {
+    font-size: 24px;
+    margin-top: 10px;
+}
+
+section#user-posts {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 600px;
+    text-align: left;
+}
+
+#body {
+    width: 100%;
+    height: 100px;
+    resize: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+input[type="submit"] {
+    background-color: #3b5998;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+input[type="submit"]:hover {
+    background-color: #4c70ba; /* Darker shade of blue on hover */
+}

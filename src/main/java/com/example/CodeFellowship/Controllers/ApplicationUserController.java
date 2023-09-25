@@ -1,6 +1,8 @@
 package com.example.CodeFellowship.Controllers;
 import com.example.CodeFellowship.Models.ApplicationUser;
+import com.example.CodeFellowship.Models.Post;
 import com.example.CodeFellowship.Repositories.ApplicationUserRepository;
+import com.example.CodeFellowship.Repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,6 +19,7 @@ import java.security.Principal;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class ApplicationUserController {
@@ -30,12 +33,12 @@ public class ApplicationUserController {
     private AuthenticationManager authenticationManager;
     @Autowired
     private UserDetailsService userDetailsService;
-
+    @Autowired
+    private PostRepository postRepository;
     @GetMapping("/login")
     public String getLoginPage() {
         return "login.html";
     }
-
     @GetMapping("/signup")
     public String getSignupPage() {
         return "signup.html";
@@ -83,15 +86,20 @@ public class ApplicationUserController {
         return "index.html";
     }
     @GetMapping("/myprofile")
-    public String viewProfile(Principal p, Model m) {
+    public String viewMyProfile(Principal p, Model model) {
         if (p != null) {
             String username = p.getName();
             ApplicationUser applicationUser = applicationUserRepository.findByUsername(username);
-            m.addAttribute("user", applicationUser);
-            return "userinfo.html";
+
+            List<Post> posts = postRepository.findByUserId(applicationUser);
+            model.addAttribute("user", applicationUser);
+            model.addAttribute("posts", posts);
         }
-        return "redirect:/login";
+        return "userinfo";
     }
+
+
+
     @GetMapping("/test")
     public String getTestPage(Principal p, Model m) {
         if (p != null) {
@@ -135,7 +143,7 @@ public class ApplicationUserController {
         }
     }
 
-    @GetMapping("/userinfoo")
+    @GetMapping("/userinfo")
     public String getUserInfoPage(Principal p, Model model) {
         if (p != null) {
             String username = p.getName();
@@ -156,5 +164,40 @@ public class ApplicationUserController {
         }
         return Collections.emptyList();
     }
+
+
+
+    @PostMapping("/follow/{id}")
+    public RedirectView followUser(Principal p, @PathVariable Long id) {
+        ApplicationUser currentUser = applicationUserRepository.findByUsername(p.getName());
+        ApplicationUser userToFollow = applicationUserRepository.findById(id).orElse(null);
+
+        if (userToFollow != null) {
+            currentUser.getFollowing().add(userToFollow);
+            applicationUserRepository.save(currentUser);
+        }
+
+        return new RedirectView("/feed");
+    }
+
+    @GetMapping("/feed")
+    public String viewFeed(Principal p, Model model) {
+        if (p != null) {
+            String username = p.getName();
+            ApplicationUser applicationUser = applicationUserRepository.findByUsername(username);
+
+            List<Post> feedPosts = postRepository.findByUserIdInOrderByCreatedAtDesc(applicationUser.getFollowing());
+
+            model.addAttribute("feedPosts", feedPosts);
+            model.addAttribute("username", username);
+        }
+
+        return "feed";
+    }
+
+
+
+
+
 
 }

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Feed</title>
+    <link rel="stylesheet" href="/css/feed.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        header {
+            background-color: #3b5998; /* Facebook blue */
+            color: #fff;
+            text-align: center;
+            padding: 1em 0;
+        }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            background-color: #3b5998;
+            overflow: hidden;
+        }
+        nav li {
+            float: left;
+            margin-right: 10px;
+        }
+        nav a {
+            display: block;
+            color: #fff;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        nav a:hover {
+            background-color: #4c70ba; /* Darker shade of blue on hover */
+        }
+        .feed {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .feed h2 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .feed-item {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        .post-content {
+            margin-bottom: 10px;
+        }
+        .post-content p {
+            font-size: 1.1em;
+            color: #333;
+        }
+        .view-profile-link {
+            display: block;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+<header class="navbar">
+    <h1>User Feed</h1>
+    <nav>
+        <ul>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/perform_logout}">Log Out</a></li>
+        </ul>
+    </nav>
+</header>
+<main class="feed">
+    <section>
+        <h2>Your Feed</h2>
+        <ul>
+            <li class="feed-item" th:each="post : ${feedPosts}">
+                <div class="post-content">
+                    <p th:text="${post.body}">Placeholder</p>
+                </div>
+                <a class="view-profile-link" th:href="@{{/users/}+${id}}">
+                    View Profile
+                </a>
+            </li>
+        </ul>
+    </section>
+</main>
+</body>
+</html>

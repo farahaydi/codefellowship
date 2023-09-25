@@ -139,6 +139,18 @@
             <li><strong>Bio:</strong> <span th:text="${user.bio}"></span></li>
             <li><strong>Image :</strong><span><img th:src="${user.image}" alt="user Image" width="100" height="100" /></span></li>
         </ul>
+<!--        <form th:if="${!isCurrentUser}" method="post" th:action="@{'/follow/' + ${id}}">-->
+<!--            <input type="submit" value="Follow">-->
+<!--        </form>-->
+
+        <h2>Users to Follow</h2>
+        <form th:unless="${isCurrentUser}" method="post" th:action="@{'/follow/' + ${id}}">
+            <!-- You can add form elements here -->
+            <input type="submit" value="Follow">
+        </form>
+
+
+
         <h2>Posts</h2>
         <ul>
             <li th:each="post : ${posts}">
