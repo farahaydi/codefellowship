@@ -2,7 +2,6 @@ package com.example.CodeFellowship.Models;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-
 @Entity
 public class Post {
     @Id
