@@ -152,10 +152,7 @@
     <h1>Find Users</h1>
 </header>
 <nav>
-    <ul>
-        <li><a th:href="@{/}">Home</a></li>
-        <li><a th:href="@{/perform_logout}">Log Out</a></li>
-    </ul>
+    <div th:replace="fragments/nav-header :: nav-bar"></div>
 </nav>
 <ul>
     <li th:each="u : ${users}">

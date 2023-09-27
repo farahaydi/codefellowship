@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -24,6 +24,8 @@
     </style>
 </head>
 <body>
+<div th:replace="fragments/nav-header :: nav-bar"></div>
+
 <h1>404 Not Found</h1>
 <span>Sorry, the page you requested could not be found.</span>
 </body>
