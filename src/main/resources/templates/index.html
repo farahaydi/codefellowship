@@ -20,6 +20,8 @@
         <li><a th:if="${username != null}" th:href="@{/}">Home</a></li>
         <li><a th:if="${username != null}" th:href="@{/myprofile}">Profile</a></li>
         <li><a th:if="${username != null}" th:href="@{/userinfo}">User Info</a></li>
+        <li><a th:if="${username != null}" th:href="@{/feed}">Feed</a></li>
+
         <li><a th:if="${username != null}" th:href="@{/perform_logout}">Log Out</a></li>
     </ul>
 </nav>

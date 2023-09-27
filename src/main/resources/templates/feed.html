@@ -73,12 +73,7 @@
 <body>
 <header class="navbar">
     <h1>User Feed</h1>
-    <nav>
-        <ul>
-            <li><a th:href="@{/}">Home</a></li>
-            <li><a th:href="@{/perform_logout}">Log Out</a></li>
-        </ul>
-    </nav>
+    <div th:replace="fragments/nav-header :: nav-bar"></div>
 </header>
 <main class="feed">
     <section>

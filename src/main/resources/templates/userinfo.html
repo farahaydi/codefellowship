@@ -122,12 +122,13 @@
 <header>
     <h1>User Profile</h1>
 </header>
-<nav>
-    <ul>
-        <li><a th:href="@{/}">Home</a></li>
-        <li><a th:href="@{/perform_logout}">Log Out</a></li>
-    </ul>
-</nav>
+<!--<nav>-->
+<!--    <ul>-->
+<!--        <li><a th:href="@{/}">Home</a></li>-->
+<!--        <li><a th:href="@{/perform_logout}">Log Out</a></li>-->
+<!--    </ul>-->
+<!--</nav>-->
+<div th:replace="fragments/nav-header :: nav-bar"></div>
 <main>
     <section id="user-info">
         <h2>User Information</h2>
